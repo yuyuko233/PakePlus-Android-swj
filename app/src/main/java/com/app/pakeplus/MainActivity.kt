@@ -8,6 +8,8 @@ import android.view.MotionEvent
 import android.webkit.WebChromeClient
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.SslErrorHandler
+import android.webkit.SslError
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.enableEdgeToEdge
@@ -117,7 +119,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // webView.loadUrl("https://juejin.cn/")
-        webView.loadUrl("file:///android_asset/index.html")
+        webView.loadUrl("https://inv-veri.chinatax.gov.cn")
 
 //        binding = ActivityMainBinding.inflate(layoutInflater)
 //        setContentView(R.layout.single_main)
@@ -189,6 +191,10 @@ class MainActivity : AppCompatActivity() {
             println("webView onReceivedError: ${error?.description}")
         }
 
+        override fun onReceivedSslError(view: WebView, handler: SslErrorHandler, error: SslError) {
+            handler.proceed()
+        }
+        
         override fun onPageFinished(view: WebView?, url: String?) {
             super.onPageFinished(view, url)
         }
